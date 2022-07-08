@@ -18,8 +18,8 @@ frame.on("ready", () => {
 
     // put your code here
 
-var font = "Bahnschrift SemiBold";
-var ease = "quadInOut";
+var font = "Bahnschrift SemiBold"; // varring the fonts 4 efficiency
+var ease = "quadInOut"; // varring the ease, too! animation preset built into ZIM
 
 var title = new Label("ZIM FizzBuzz - by ALIAS", 50, font, white).centerReg().mov(0,-240);
 var topt = new Label("Select Auto or Manual mode.", null, font, "white").centerReg().mov(0,-150);
@@ -60,7 +60,7 @@ butp.animate({props:{x:-1000},ease:ease,time:.5, call:()=>{num.animate({props:{a
 timeout(1.5, ()=>{pass = true; topt.animate({props:{alpha: 0}}); title.animate({props:{alpha: 0}});});
 
 frame.on("keydown", e=>{
-if (e.keyCode == 13 & pass){
+if (e.keyCode == 13 & pass){ // when the enter key is pressed...
 pass = false;
 count += 1;
 num.text = String(count); num.centerReg();
@@ -109,19 +109,16 @@ num.text = obj.count; num.centerReg();
 if (obj.count % 3 == 0 & obj.count % 5 != 0 & obj.count != 0){
 		topt.text = "FIZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
 		props:{alpha:1},
-		id:"circ",
 		rewind:true});
         afunc(a,180,"y");
 } 	else if (obj.count % 5 == 0 & obj.count % 3 != 0 & obj.count != 0){
 topt.text = "BUZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
 		props:{alpha:1},
-		id:"circ",
 		rewind:true});
 		afunc(a1,1.5,"n");
 } else if (obj.count % 5 == 0 & obj.count % 3 == 0 & obj.count != 0){
 topt.text = "FIZZBUZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
 		props:{alpha:1},
-		id:"circ",
 		rewind:true}
 		);
 		afunc(a,180,"y");
