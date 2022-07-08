@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>FizzBuzz</title>
+
+<!-- zimjs.com - JavaScript Canvas Framework -->
+<script type=module>
+
+import zim from "https://zimjs.org/cdn/00/zim";
+
+// See Docs under Frame for FIT, FILL, FULL, and TAG
+const frame = new Frame(FIT, 1024, 768, light, dark);
+frame.on("ready", () => {
+    const stage = frame.stage;
+    let stageW = frame.width;
+    let stageH = frame.height;
+
+    // put your code here
+
+var font = "Bahnschrift SemiBold";
+var ease = "quadInOut";
+
+var title = new Label("ZIM FizzBuzz - by ALIAS", 50, font, white).centerReg().mov(0,-240);
+var topt = new Label("Select Auto or Manual mode.", null, font, "white").centerReg().mov(0,-150);
+var num = new Label("1", 80, "Courier", "white").centerReg(); num.alpha = 0;
+
+var a = new Circle(1,"pink").centerReg().vis(false);
+var a1 = new Circle(200,"orange").centerReg().vis(false);
+
+var butp = new Button(200,100,"Manual").centerReg().mov(-200); butp.label.font = font;
+var buta = new Button(200,100,"Auto").centerReg().mov(200); buta.label.font = font;
+
+let count = 1;
+var al = 1;
+
+let pass = false;
+var auv = false;
+
+function afunc(x,y,z){
+if (x == a1){al = 0;} else {al = 1;}
+		x.vis(true).bot()
+            .animate({
+                props:{scale:y, alpha:al}, 
+                rewind:true,
+				ease:"backInOut",
+                call:()=>{pass = true; topt.text = ""; if (x == a){x.vis(false);} else {x.animate({
+				props:{scale:0}
+				})}}
+            });  }
+
+butp.tap(()=>{
+
+var auv = true;
+topt.text = "Press Enter to go to the next number.";
+topt.centerReg().mov(0,-150); 
+buta.animate({props:{x:1500},ease:ease,time:.5});
+butp.animate({props:{x:-1000},ease:ease,time:.5, call:()=>{num.animate({props:{alpha:1}, time:.5});}});
+
+timeout(1.5, ()=>{pass = true; topt.animate({props:{alpha: 0}}); title.animate({props:{alpha: 0}});});
+
+frame.on("keydown", e=>{
+if (e.keyCode == 13 & pass){
+pass = false;
+count += 1;
+num.text = String(count); num.centerReg();
+stage.update();
+if (count % 3 == 0 & count % 5 != 0){
+		topt.text = "FIZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
+		props:{alpha:1},
+		rewind:true});
+        afunc(a,180,"y");
+} else if (count % 5 == 0 & count % 3 != 0){
+topt.text = "BUZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
+		props:{alpha:1},
+		rewind:true});
+		afunc(a1,1.5,"n");
+} else if (count % 5 == 0 & count % 3 == 0){
+topt.text = "FIZZBUZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
+		props:{alpha:1},
+		rewind:true});
+afunc(a,180,"y");
+afunc(a1,1.5,"n");
+} else timeout(.5, ()=>{pass = true;});
+
+}
+});
+
+});
+
+buta.tap(()=>{
+
+if (!auv){
+buta.animate({props:{x:500},ease:ease,time:.5});
+butp.animate({props:{x:-1000},ease:ease,time:.5});
+topt.text = "Click again when you are ready for FizzBuzz to start."; topt.centerReg().mov(0,-150);
+buta.label.text = "Start"; buta.centerReg();
+auv = 1;
+}  else{
+timeout(1.5, ()=>{pass = true; topt.animate({props:{alpha: 0}}); title.animate({props:{alpha: 0}});});
+buta.animate({props:{y:1000}, ease:ease,time:.5, call:()=>{
+num.animate({props:{alpha:1}, ease:ease,time:.5});
+}});
+
+interval(1.5, obj=>{
+
+num.text = obj.count; num.centerReg();
+
+if (obj.count % 3 == 0 & obj.count % 5 != 0 & obj.count != 0){
+		topt.text = "FIZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
+		props:{alpha:1},
+		id:"circ",
+		rewind:true});
+        afunc(a,180,"y");
+} 	else if (obj.count % 5 == 0 & obj.count % 3 != 0 & obj.count != 0){
+topt.text = "BUZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
+		props:{alpha:1},
+		id:"circ",
+		rewind:true});
+		afunc(a1,1.5,"n");
+} else if (obj.count % 5 == 0 & obj.count % 3 == 0 & obj.count != 0){
+topt.text = "FIZZBUZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.animate({
+		props:{alpha:1},
+		id:"circ",
+		rewind:true}
+		);
+		afunc(a,180,"y");
+		afunc(a1,1.5,"n");}
+		
+
+stage.update();
+
+
+}, 101, true); 
+
+}});
+
+
+
+
+    // don't put your code after here
+        
+    stage.update(); // needed to view changes
+});
+
+</script>
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+</head>
+<body></body>
+</html>
