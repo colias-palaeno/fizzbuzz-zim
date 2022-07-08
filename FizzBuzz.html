@@ -37,7 +37,7 @@ var al = 1;
 let pass = false;
 var auv = false;
 
-function afunc(x,y,z){
+function afunc(x,y,z){ //animates a circle with some custom properties, like, what is the alpha value, the object x, or the scale?
 if (x == a1){al = 0;} else {al = 1;}
 		x.vis(true).bot()
             .animate({
@@ -49,7 +49,7 @@ if (x == a1){al = 0;} else {al = 1;}
 				})}}
             });  }
 
-butp.tap(()=>{
+butp.tap(()=>{ 
 
 var auv = true;
 topt.text = "Press Enter to go to the next number.";
@@ -126,18 +126,12 @@ topt.text = "FIZZBUZZ"; topt.size = 100; topt.centerReg().mov(0,-200); topt.anim
 		);
 		afunc(a,180,"y");
 		afunc(a1,1.5,"n");}
-		
 
 stage.update();
-
-
 }, 101, true); 
 
 }});
-
-
-
-
+	
     // don't put your code after here
         
     stage.update(); // needed to view changes
